@@ -3,6 +3,7 @@ package com.irozon.sneaker
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.support.v7.widget.AppCompatImageView
 import android.view.Gravity
 import android.view.View
@@ -16,6 +17,18 @@ internal class SneakerView(context: Context?) : LinearLayout(context) {
     init {
         id = R.id.mainLayout
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            setOnApplyWindowInsetsListener { v, insets ->
+                if(insets.displayCutout!=null){
+                    insets.displayCutout?.let {
+                        setPadding(46,it.safeInsetTop,46,paddingBottom)
+                    }
+                }else{
+                    setPadding(46,insets.systemWindowInsetTop,46,paddingBottom)
+                }
+                insets
+            }
+        }
     }
 
     private val DEFAULT_VALUE = -100000

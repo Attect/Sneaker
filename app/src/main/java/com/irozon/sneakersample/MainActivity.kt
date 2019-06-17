@@ -30,11 +30,13 @@ class MainActivity : AppCompatActivity() {
         }
         btShowSuccess.setOnClickListener {
             val sneaker = Sneaker.with(viewGroup)
+            sneaker.autoHide(false)
             val view = LayoutInflater.from(this).inflate(R.layout.custom_view, sneaker.getView(), false)
             view.findViewById<TextView>(R.id.tvInstall).setOnClickListener{
                 Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
             }
             sneaker.sneakCustom(view)
+            view.setOnClickListener { sneaker.hide() }
         }
     }
 }
