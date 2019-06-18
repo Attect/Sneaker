@@ -11,6 +11,7 @@ import android.os.Handler
 import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class Sneaker(private var context: Context) : View.OnClickListener, LifecycleObs
     private var mIconDrawable: Drawable? = null
     private var mBackgroundColor = DEFAULT_VALUE
     private var mHeight = DEFAULT_VALUE
+    public var topSafeHeight = 0
     private var mIconColorFilterColor = DEFAULT_VALUE
     private var mIconSize = 24
     private var mTitle = ""
@@ -411,10 +413,11 @@ class Sneaker(private var context: Context) : View.OnClickListener, LifecycleObs
     private fun sneakView() {
         // Main layout
         targetView?.let {
+            if(topSafeHeight == 0) topSafeHeight = Utils.getStatusBarHeight(it)
             val layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     if (mHeight == DEFAULT_VALUE && isActivity)
-                        Utils.getStatusBarHeight(it) + Utils.convertToDp(context, 56f)
+                        topSafeHeight + Utils.convertToDp(context, 56f)
                     else if (mHeight == DEFAULT_VALUE && !isActivity)
                         Utils.convertToDp(context, 56f)
                     else
@@ -432,7 +435,7 @@ class Sneaker(private var context: Context) : View.OnClickListener, LifecycleObs
                 this.layoutParams = layoutParams
                 orientation = LinearLayout.HORIZONTAL
                 gravity = Gravity.CENTER_VERTICAL
-//                setPadding(46, if (isActivity) Utils.getStatusBarHeight(it) else 0, 46, 0)
+                setPadding(46, if (isActivity) topSafeHeight else 0, 46, 0)
                 setBackground(mBackgroundColor, mCornerRadius)
                 setIcon(mIconDrawable, mIsCircular, Utils.convertToDp(context, mIconSize.toFloat()), mIconColorFilterColor)
                 setTextContent(mTitle, mTitleColor, mMessage, mMessageColor, mTypeFace)

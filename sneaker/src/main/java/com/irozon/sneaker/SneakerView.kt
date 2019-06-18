@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v7.widget.AppCompatImageView
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -17,18 +18,6 @@ internal class SneakerView(context: Context?) : LinearLayout(context) {
     init {
         id = R.id.mainLayout
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            setOnApplyWindowInsetsListener { v, insets ->
-                if(insets.displayCutout!=null){
-                    insets.displayCutout?.let {
-                        setPadding(46,it.safeInsetTop,46,paddingBottom)
-                    }
-                }else{
-                    setPadding(46,insets.systemWindowInsetTop,46,paddingBottom)
-                }
-                insets
-            }
-        }
     }
 
     private val DEFAULT_VALUE = -100000
@@ -64,7 +53,7 @@ internal class SneakerView(context: Context?) : LinearLayout(context) {
             tvTitle.text = title
             tvTitle.isClickable = false
 
-            tvTitle.setPadding(46, if (description.isNotEmpty()) 26 else 0, 26, 0) // Top padding only if there is message
+            tvTitle.setPadding(46,  0, 26, 0) // Top padding only if there is message
             if (titleColor != DEFAULT_VALUE) tvTitle.setTextColor(titleColor)
             if (typeface != null) tvTitle.typeface = typeface
 
@@ -80,7 +69,7 @@ internal class SneakerView(context: Context?) : LinearLayout(context) {
             tvMessage.text = description
             tvMessage.isClickable = false
 
-            tvMessage.setPadding(46, 0, 26, if (title.isNotEmpty()) 26 else 0) // Top padding only if there is message
+            tvMessage.setPadding(46, 0, 26,  0) // Top padding only if there is message
             if (messageColor != DEFAULT_VALUE) tvMessage.setTextColor(messageColor)
             if (typeface != null) tvMessage.typeface = typeface
 
