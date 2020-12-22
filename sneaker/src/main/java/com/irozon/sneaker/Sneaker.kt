@@ -1,23 +1,22 @@
 package com.irozon.sneaker
 
 import android.app.Activity
-import android.arch.lifecycle.LifecycleObserver
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.util.Log
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleObserver
 import com.irozon.sneaker.interfaces.OnSneakerClickListener
 import com.irozon.sneaker.interfaces.OnSneakerDismissListener
 
@@ -446,12 +445,15 @@ class Sneaker(private var context: Context) : View.OnClickListener, LifecycleObs
 
             sneakerView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.popup_show))
             if (mAutoHide) {
-                val handler = Handler()
-                handler.removeCallbacks(null)
-                handler.postDelayed({
-                    removeView(sneakerView)
-                    mDismissListener?.onDismiss()
-                }, mDuration.toLong())
+                Looper.myLooper()?.let { looper ->
+                    val handler = Handler(looper)
+                    handler.removeCallbacks { }
+                    handler.postDelayed({
+                        removeView(sneakerView)
+                        mDismissListener?.onDismiss()
+                    }, mDuration.toLong())
+                }
+
             }
         }
     }
@@ -465,12 +467,15 @@ class Sneaker(private var context: Context) : View.OnClickListener, LifecycleObs
 
             sneakerView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.popup_show))
             if (mAutoHide) {
-                val handler = Handler()
-                handler.removeCallbacks(null)
-                handler.postDelayed({
-                    removeView(sneakerView)
-                    mDismissListener?.onDismiss()
-                }, mDuration.toLong())
+                Looper.myLooper()?.let { looper ->
+                    val handler = Handler(looper)
+                    handler.removeCallbacks { }
+                    handler.postDelayed({
+                        removeView(sneakerView)
+                        mDismissListener?.onDismiss()
+                    }, mDuration.toLong())
+                }
+
             }
         }
         return this

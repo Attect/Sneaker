@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sneaker.iml" filepath="$PROJECT_DIR$/Sneaker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sneaker/sneaker.iml" filepath="$PROJECT_DIR$/sneaker/sneaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sneaker.iml" filepath="$PROJECT_DIR$/.idea/modules/Sneaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Sneaker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Sneaker.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sneaker/Sneaker.sneaker.iml" filepath="$PROJECT_DIR$/.idea/modules/sneaker/Sneaker.sneaker.iml" />
     </modules>
   </component>
 </project>

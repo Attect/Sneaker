@@ -3,14 +3,12 @@ package com.irozon.sneaker
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.support.v7.widget.AppCompatImageView
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import com.irozon.sneaker.Utils.customView
 import com.irozon.sneaker.widget.RoundedImageView
 
